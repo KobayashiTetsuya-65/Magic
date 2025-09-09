@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [Header("キャラの半径"), SerializeField] private float _radius = 0.5f;
     [Header("キャラの高さ"), SerializeField] private float _height = 2.0f;
     [Header("接地判定の距離"), SerializeField] private float _groundCheckDistance = 0.1f;
+    [SerializeField] private Transform _cameraPos;
     private float h, v;
     private bool _isGrounded;
     private Vector3 _direction,_velocity,_moveData,_nextPos,_capsuleTop,_capsuleBottom;
@@ -23,7 +24,9 @@ public class Player : MonoBehaviour
     {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        _direction = (_tr.right * h + _tr.forward * v).normalized;
+        _direction = (_cameraPos.right * h + _cameraPos.forward * v).normalized;
+        _direction.y = 0f;
+        _direction.Normalize();
         //ジャンプ
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
