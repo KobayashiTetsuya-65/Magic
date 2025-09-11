@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [Header("接地判定の距離"), SerializeField] private float _groundCheckDistance = 0.1f;
     [SerializeField] private Transform _cameraPos;
     private float h, v;
-    private bool _isGrounded;
+    private bool _isGrounded,_secondJump;
     private Vector3 _direction,_velocity,_moveData,_nextPos,_capsuleTop,_capsuleBottom,_limitPos;
     private Transform _tr;
 
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         _tr = GetComponent<Transform>();
+        _secondJump = false;
     }
     private void Update()
     {
@@ -36,6 +37,12 @@ public class Player : MonoBehaviour
         {
             _velocity.y = _jumpPower;
         }
+        //二段ジャンプ
+        if(Input.GetKeyDown(KeyCode.Space) && !_isGrounded && !_secondJump)
+        {
+            _velocity.y = _jumpPower;
+            _secondJump = true;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -44,6 +51,7 @@ public class Player : MonoBehaviour
         _capsuleTop = _tr.position + Vector3.up * (_height * 0.5f - _radius);
         _capsuleBottom = _tr.position + Vector3.down * (_height * 0.5f - _radius);
         _isGrounded = Physics.CheckCapsule(_capsuleBottom, _capsuleTop, _radius + _groundCheckDistance,LayerMask.GetMask("Default"));
+        
 
         //重力
         _velocity.y += -_gravity * Time.fixedDeltaTime;
@@ -51,6 +59,7 @@ public class Player : MonoBehaviour
         if(_velocity.y < 0 && _isGrounded)
         {
             _velocity.y = 0f;
+            _secondJump = false;
             Debug.Log("a");
         }
 
