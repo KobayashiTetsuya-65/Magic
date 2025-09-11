@@ -5,7 +5,6 @@ using UnityEngine;
 public class GamaManager : MonoBehaviour
 {
     public static GamaManager Instance;
-
     private void Awake()
     {
         Application.targetFrameRate = 120;

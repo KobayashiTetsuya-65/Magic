@@ -247,11 +247,12 @@ MonoBehaviour:
   _speed: 15
   _jumpPower: 10
   _brakePower: 10
-  _gravity: 29.4
+  _gravity: 19.6
   _damping: 0.5
   _radius: 1
   _height: 2
   _groundCheckDistance: 0.1
+  _cameraPos: {fileID: 963194228}
 --- !u!114 &412349749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseSensitivity: 477
+  _height: 2
+  _distance: 4
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

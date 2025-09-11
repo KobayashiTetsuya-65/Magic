@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("行動制限")]
+    [SerializeField] private Vector3 _minBounds;
+    [SerializeField] private Vector3 _maxBounds;
     [Header("移動速度"),SerializeField] private float _speed = 15f;
     [Header("ジャンプ力"),SerializeField] private float _jumpPower = 10f;
     [Header("ブレーキ力"), SerializeField] private float _brakePower = 5f;
@@ -13,8 +16,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _cameraPos;
     private float h, v;
     private bool _isGrounded;
-    private Vector3 _direction,_velocity,_moveData,_nextPos,_capsuleTop,_capsuleBottom;
+    private Vector3 _direction,_velocity,_moveData,_nextPos,_capsuleTop,_capsuleBottom,_limitPos;
     private Transform _tr;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,28 +88,33 @@ public class Player : MonoBehaviour
             _nextPos = _tr.position + _moveData;
         }
 
-        _tr.position = _nextPos;       
+        //行動範囲制限
+        if (!Inside(_nextPos))
+        {
+            _nextPos.x = Mathf.Clamp(_nextPos.x, _minBounds.x, _maxBounds.x);
+            _nextPos.y = Mathf.Clamp(_nextPos.y, _minBounds.y, _maxBounds.y);
+            _nextPos.z = Mathf.Clamp(_nextPos.z, _minBounds.z, _maxBounds.z);
+        }
+        _tr.position = _nextPos;
     }
-    private void OnDrawGizmos()//ChatGPT引用
+    /// <summary>
+    /// ステージ内判定
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
+    private bool Inside(Vector3 pos)
+    {
+        return (pos.x <= _maxBounds.x && pos.x >= _minBounds.x &&
+                pos.y <= _maxBounds.y && pos.y >= _minBounds.y &&
+                pos.z <= _maxBounds.z && pos.z >= _minBounds.z);
+    }
+    private void OnDrawGizmos()
     {
         if (_tr == null) _tr = GetComponent<Transform>();
-
-        // カプセルの位置を再計算（FixedUpdateと同じ計算にする）
-        Vector3 capsuleTop = _tr.position + Vector3.up * (_height * 0.5f - _radius);
-        Vector3 capsuleBottom = _tr.position + Vector3.down * (_height * 0.5f - _radius);
-        float checkRadius = _radius + _groundCheckDistance;
-
-        // 判定しているカプセルの色を変える
+        Vector3 center = _tr.position;
+        float radius = _radius + _groundCheckDistance;
         Gizmos.color = Color.cyan;
-
-        // UnityのGizmosには「カプセルを直接描画する関数」がないので、
-        // Sphereを2つ＋Cylinderを擬似的に描画するのが一般的
-        Gizmos.DrawWireSphere(capsuleTop, checkRadius);
-        Gizmos.DrawWireSphere(capsuleBottom, checkRadius);
-        Gizmos.DrawLine(capsuleTop + Vector3.forward * checkRadius, capsuleBottom + Vector3.forward * checkRadius);
-        Gizmos.DrawLine(capsuleTop + Vector3.back * checkRadius, capsuleBottom + Vector3.back * checkRadius);
-        Gizmos.DrawLine(capsuleTop + Vector3.left * checkRadius, capsuleBottom + Vector3.left * checkRadius);
-        Gizmos.DrawLine(capsuleTop + Vector3.right * checkRadius, capsuleBottom + Vector3.right * checkRadius);
+        Gizmos.DrawWireSphere(center, radius);
     }
 }
 
