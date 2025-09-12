@@ -18,7 +18,9 @@ public class Player : MonoBehaviour
     private bool _isGrounded,_secondJump;
     private Vector3 _direction,_velocity,_moveData,_nextPos,_capsuleTop,_capsuleBottom,_limitPos;
     private Transform _tr;
-
+    /// <summary>
+    /// プレイヤー
+    /// </summary>
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +62,6 @@ public class Player : MonoBehaviour
         {
             _velocity.y = 0f;
             _secondJump = false;
-            Debug.Log("a");
         }
 
         //加速、減速
