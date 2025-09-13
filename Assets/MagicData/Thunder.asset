@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6f1432e1ab6ca48847c3e73302219f, type: 3}
+  m_Name: Thunder
+  m_EditorClassIdentifier: 
+  _magicName: Thunder
+  _magicPrefab: {fileID: 989799693733876913, guid: 11956b2f45b46964c831251d9ee6f57f, type: 3}
+  _power: 15
+  _speed: 20
+  _interval: 5
+  _knockBackPower: 3
+  _mazzle: {fileID: 0}

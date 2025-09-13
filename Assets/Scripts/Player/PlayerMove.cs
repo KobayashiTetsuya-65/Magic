@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     [Header("s“®§ŒÀ")]
     [SerializeField] private Vector3 _minBounds;
