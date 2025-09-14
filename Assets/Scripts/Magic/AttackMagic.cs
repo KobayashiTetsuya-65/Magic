@@ -8,15 +8,15 @@ public class AttackMagic : MagicData
     [SerializeField] private float _speed;
     [SerializeField] private float _interval;
     [SerializeField] private float _knockBackPower;
-    [SerializeField] private Transform _mazzle;
-    public int Power => _power;
-    public float Speed => _speed;
+    [SerializeField] private GameObject _mazzle;
     public float Interval => _interval;
     public float KnockBack => _knockBackPower;
 
     public override void Execute(GameObject user, Transform mazzle)
     {
         Debug.Log($"{MagicName}Çî≠ìÆÅI");
-        GameObject bullet = Instantiate( _magicPrefab,user.transform.position,mazzle.rotation);
+        GameObject bullet = Instantiate( _magicPrefab,mazzle.transform.position,mazzle.transform.rotation);
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.Init(_speed, _power);
     }
 }

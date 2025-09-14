@@ -6,5 +6,5 @@ public abstract class MagicData : ScriptableObject
 
     public string MagicName => _magicName;
 
-    public abstract void Execute(GameObject user,Transform mazzle);
+    public abstract void Execute(GameObject user,Transform _mazzle);
 }

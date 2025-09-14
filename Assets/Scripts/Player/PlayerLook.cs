@@ -9,6 +9,7 @@ public class PlayerLook : MonoBehaviour
     [Header("プレイヤーとの距離"), SerializeField] private float _distance = 4f;
     [Header("標的"), SerializeField] private List<GameObject> _points = new List<GameObject>();
     [SerializeField] private float _cameraSpeed = 2f;
+    [SerializeField] private Transform _mazzle;
     private List<Vector3> _trPointsList = new List<Vector3>();
     private Vector3 _trTarget,_direction,_toCandidate;
     private Transform _trPlayer, _trCamera,_bestTarget,_candidate;
@@ -39,7 +40,7 @@ public class PlayerLook : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.L)) SwitchTarget(true);
         if (Input.GetKeyDown(KeyCode.J)) SwitchTarget(false);
-
+        
         if (Focus)
         {
             _trPointsList.Clear();
@@ -53,6 +54,7 @@ public class PlayerLook : MonoBehaviour
             _trCamera.position = Vector3.Slerp(_trCamera.position,_trTarget,Time.deltaTime * _cameraSpeed);
             _trCamera.rotation = Quaternion.Lerp(_trCamera.rotation, _rotation, Time.deltaTime * _cameraSpeed);
             _yRotate = 0;
+            _mazzle.rotation = Quaternion.LookRotation(_trPointsList[_targetIndex] - _mazzle.position);
         }
         else
         {
