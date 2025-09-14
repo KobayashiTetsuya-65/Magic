@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _magicName: Fire
   _magicPrefab: {fileID: 7591374902561777116, guid: f71184524afa134458bb786fa2dec072, type: 3}
-  _power: 5
-  _speed: 10
+  _power: 10
+  _speed: 30
   _interval: 1
   _knockBackPower: 1
+  _mazzle: {fileID: 8295830695028781796, guid: 067a9f46e7168114a8c8bd93d25a2ba9, type: 3}
