@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -23,8 +24,13 @@ public class Bullet : MonoBehaviour
         if (_timer > _lifeTime) Destroy(gameObject);
         if (Physics.CheckSphere(_tr.position, 0.5f, LayerMask.GetMask("Point")))
         {
-            GamaManager.Instance.DrawTriangleArea();
+            StartCoroutine(Wait());
         }
         if (Physics.CheckSphere(_tr.position, 0.5f, LayerMask.GetMask("Default"))) Destroy(gameObject);
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
     }
 }

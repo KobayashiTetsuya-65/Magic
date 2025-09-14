@@ -7,7 +7,7 @@ public class GamaManager : MonoBehaviour
     public static GamaManager Instance;
     public GameObject[] Points;
     public Material Material;
-    Color color = Color.blue;
+    public PointErements ReciveErement;
     private void Awake()
     {
         Application.targetFrameRate = 120;
@@ -29,9 +29,7 @@ public class GamaManager : MonoBehaviour
         mesh.triangles = new int[] { 0,1,2};
         mesh.RecalculateNormals();
         mf.mesh = mesh;
-        Material mat = Material;
-        mat.color = color;
-        mr.material = mat;
+        mr.material = Material;
     }
     // Start is called before the first frame update
     void Start()
@@ -44,4 +42,8 @@ public class GamaManager : MonoBehaviour
     {
         
     }
+}
+public enum PointErements
+{
+    Erea1,Erea2,Erea3,Erea4,Erea5,Erea6
 }
