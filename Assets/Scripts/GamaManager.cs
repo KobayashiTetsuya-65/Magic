@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class GamaManager : MonoBehaviour
 {
+    [SerializeField] private LineRenderer[] _lineRenderer;
+    [SerializeField] private Material[] _materials;
     [SerializeField] private int _groupTotal = 1;
     [SerializeField] private int _pointParGroup = 3;
     public static GamaManager Instance;
     private List<GameObject[]> _groups = new List<GameObject[]>();
-    public Material Material;
     private List<PointErements[]> _reciveErements = new List<PointErements[]>();
-    public List<List<bool>> _areaFlags = new List<List<bool>>();
     private int _maxGroup = -1;
     private void Awake()
     {
@@ -42,17 +42,6 @@ public class GamaManager : MonoBehaviour
             }
             _groups.Add(group);
         }
-        //ポイントboolの初期化
-        //_areaFlags.Clear();
-        //for (int i = 0; i < _groupTotal; i++)
-        //{
-        //    List<bool> group = new List<bool>();
-        //    for(int j = 0;j < _pointParGroup; j++)
-        //    {
-        //        group.Add(false);
-        //    }
-        //    _areaFlags.Add(group);
-        //}
         //ポイントの状態を初期化
         _reciveErements.Clear();
         for(int i = 0; i < _groupTotal; i++)
@@ -68,14 +57,18 @@ public class GamaManager : MonoBehaviour
     private void DrawTriangleArea(int group)
     {
         GameObject triangle = new GameObject("Triangle");
-        MeshFilter mf = triangle.AddComponent<MeshFilter>();
-        MeshRenderer mr = triangle.AddComponent<MeshRenderer>();
-        Mesh mesh = new Mesh();
-        mesh.vertices = new Vector3[] { _groups[group][0].transform.position, _groups[group][1].transform.position, _groups[group][2].transform.position };
-        mesh.triangles = new int[] { 0,1,2};
-        mesh.RecalculateNormals();
-        mf.mesh = mesh;
-        mr.material = Material;
+        var positions = new Vector3[]
+        {
+            _groups[group][0].transform.position, 
+            _groups[group][1].transform.position, 
+            _groups[group][2].transform.position,
+            _groups[group][0].transform.position
+        };
+        _lineRenderer[group].positionCount = positions.Length;
+        _lineRenderer[group].SetPositions(positions);
+        _lineRenderer[group].numCapVertices = 10;
+        _lineRenderer[group].numCornerVertices = 10;
+        _lineRenderer[group].material = _materials[group];
     }
     public void SetFlag(int index,int number,PointErements erement)
     {
