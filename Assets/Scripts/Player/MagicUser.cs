@@ -27,6 +27,11 @@ public class MagicUser : MonoBehaviour
         {
             CastMagic(1);
         }
+        //デバッグ用
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            CastMagic(2);
+        }
     }
     private void CastMagic(int index)
     {

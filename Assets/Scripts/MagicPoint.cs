@@ -21,12 +21,12 @@ public class MagicPoint : MonoBehaviour
         if(Physics.CheckSphere(_tr.position, 0.5f, LayerMask.GetMask("PlayerBullet")))
         {
             _mr.material.color = Color.blue;
-            GamaManager.Instance.ReciveErement = _erement;
-            GamaManager.Instance.SetFlag(GroupNumber,PointNumber, true);
+            GamaManager.Instance.SetFlag(GroupNumber,PointNumber, PointErements.Player);
         }
         if(Physics.CheckSphere(_tr.position, 0.5f, LayerMask.GetMask("EnemyBullet")))
         {
             _mr.material.color= Color.red;
+            GamaManager.Instance.SetFlag(GroupNumber, PointNumber, PointErements.Enemy);
         }
     }
 }
