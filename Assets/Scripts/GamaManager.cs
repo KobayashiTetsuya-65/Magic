@@ -53,7 +53,7 @@ public class GamaManager : MonoBehaviour
             _areaFlags.Add(group);
         }
     }
-    public void DrawTriangleArea(int group)
+    private void DrawTriangleArea(int group)
     {
         GameObject triangle = new GameObject("Triangle");
         MeshFilter mf = triangle.AddComponent<MeshFilter>();
@@ -71,6 +71,7 @@ public class GamaManager : MonoBehaviour
         if (AllTrue(_areaFlags[index]))
         {
             DrawTriangleArea(index);
+            Debug.Log("エリア確保！");
         }
     }
     private bool AllTrue(List<bool> list)
