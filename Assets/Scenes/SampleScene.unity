@@ -226,7 +226,7 @@ Transform:
   m_GameObject: {fileID: 412349743}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.65, y: 8.5, z: -19}
+  m_LocalPosition: {x: 20.89, y: 9.03, z: -24.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -414,6 +414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _erement: 0
+  GroupNumber: 0
+  PointNumber: 2
 --- !u!1 &598790098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,6 +1144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _erement: 0
+  GroupNumber: 0
+  PointNumber: 1
 --- !u!4 &1673139123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8295830695028781796, guid: 067a9f46e7168114a8c8bd93d25a2ba9, type: 3}
@@ -1191,10 +1195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451f45f76d3b2a144884e91102bac2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points:
-  - {fileID: 2112233711}
-  - {fileID: 1172027039}
-  - {fileID: 467674714}
+  _groupTotal: 1
+  _pointParGroup: 3
   Material: {fileID: 2100000, guid: 5c32a4f71a506c547b44ee6d79a38904, type: 2}
   ReciveErement: 0
 --- !u!1 &2076209530
@@ -1421,6 +1423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _erement: 0
+  GroupNumber: 0
+  PointNumber: 0
 --- !u!1001 &5331579021158501564
 PrefabInstance:
   m_ObjectHideFlags: 0
