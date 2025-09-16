@@ -8,6 +8,7 @@ public class GamaManager : MonoBehaviour
     public GameObject[] Points;
     public Material Material;
     public PointErements ReciveErement;
+    private bool[] _areaFlags = new bool[3];
     private void Awake()
     {
         Application.targetFrameRate = 120;
@@ -31,19 +32,24 @@ public class GamaManager : MonoBehaviour
         mf.mesh = mesh;
         mr.material = Material;
     }
-    // Start is called before the first frame update
-    void Start()
+    public void SetFlag(int index,bool value)
     {
-        
+        _areaFlags[index] = value;
+        if (AllTrue(_areaFlags))
+        {
+            DrawTriangleArea();
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    private bool AllTrue(bool[] array)
     {
-        
+        foreach (bool b in array)
+        {
+            if (!b)return false;
+        }
+        return true;
     }
 }
 public enum PointErements
 {
-    Erea1,Erea2,Erea3,Erea4,Erea5,Erea6
+    Player,Enemy,Null
 }

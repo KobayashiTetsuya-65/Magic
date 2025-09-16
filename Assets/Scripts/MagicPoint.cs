@@ -4,6 +4,7 @@ using UnityEngine;
 public class MagicPoint : MonoBehaviour
 {
     [SerializeField] private PointErements _erement;
+    [SerializeField] private int _pointNumber;
     private Transform _tr;
     private MeshRenderer _mr;
     // Start is called before the first frame update
@@ -20,7 +21,7 @@ public class MagicPoint : MonoBehaviour
         {
             _mr.material.color = Color.blue;
             GamaManager.Instance.ReciveErement = _erement;
-            GamaManager.Instance.DrawTriangleArea();
+            GamaManager.Instance.SetFlag(_pointNumber, true);
         }
         if(Physics.CheckSphere(_tr.position, 0.5f, LayerMask.GetMask("EnemyBullet")))
         {
