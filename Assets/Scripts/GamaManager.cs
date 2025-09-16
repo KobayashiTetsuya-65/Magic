@@ -12,7 +12,7 @@ public class GamaManager : MonoBehaviour
     public static GamaManager Instance;
     private List<GameObject[]> _groups = new List<GameObject[]>();
     private List<PointErements[]> _reciveErements = new List<PointErements[]>();
-    private int _maxGroup = -1;
+    private int _maxGroup = -1, _drawByPlayer;
     private void Awake()
     {
         Application.targetFrameRate = 120;
@@ -62,13 +62,12 @@ public class GamaManager : MonoBehaviour
             _groups[group][0].transform.position, 
             _groups[group][1].transform.position, 
             _groups[group][2].transform.position,
-            _groups[group][0].transform.position
         };
         _lineRenderer[group].positionCount = positions.Length;
         _lineRenderer[group].SetPositions(positions);
         _lineRenderer[group].numCapVertices = 10;
         _lineRenderer[group].numCornerVertices = 10;
-        _lineRenderer[group].material = _materials[group];
+        _lineRenderer[group].material = _materials[_drawByPlayer];
     }
     public void SetFlag(int index,int number,PointErements erement)
     {
@@ -92,6 +91,7 @@ public class GamaManager : MonoBehaviour
                     {
                         if(erements[i - 1] == erements[i])
                         {
+                            _drawByPlayer = 0;
                             continue;
                         }
                         return false;
@@ -102,6 +102,7 @@ public class GamaManager : MonoBehaviour
                     {
                         if (erements[i - 1] == erements[i])
                         {
+                            _drawByPlayer = 1;
                             continue;
                         }
                         return false;

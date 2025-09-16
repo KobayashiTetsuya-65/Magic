@@ -1616,7 +1616,7 @@ LineRenderer:
     generateLightingData: 0
   m_MaskInteraction: 0
   m_UseWorldSpace: 1
-  m_Loop: 0
+  m_Loop: 1
   m_ApplyActiveColorSpace: 1
 --- !u!4 &1193853061
 Transform:
@@ -1706,7 +1706,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.53066635
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1755,7 +1755,7 @@ LineRenderer:
     generateLightingData: 0
   m_MaskInteraction: 0
   m_UseWorldSpace: 1
-  m_Loop: 0
+  m_Loop: 1
   m_ApplyActiveColorSpace: 1
 --- !u!4 &1430054103
 Transform:
