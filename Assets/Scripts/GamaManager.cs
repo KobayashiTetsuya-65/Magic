@@ -56,7 +56,6 @@ public class GamaManager : MonoBehaviour
     }
     private void DrawTriangleArea(int group)
     {
-        GameObject triangle = new GameObject("Triangle");
         var positions = new Vector3[]
         {
             _groups[group][0].transform.position, 
