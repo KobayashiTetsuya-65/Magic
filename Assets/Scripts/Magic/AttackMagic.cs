@@ -1,5 +1,8 @@
 using Unity.VisualScripting;
 using UnityEngine;
+/// <summary>
+/// 攻撃魔法データ
+/// </summary>
 [CreateAssetMenu(menuName = "Game/Magic/AttackMagic")]
 public class AttackMagic : MagicData
 {

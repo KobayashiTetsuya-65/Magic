@@ -1,5 +1,7 @@
 using UnityEngine;
-
+/// <summary>
+/// プレイヤーの行動制御
+/// </summary>
 public class PlayerMove : MonoBehaviour
 {
     [Header("行動制限")]
@@ -18,9 +20,7 @@ public class PlayerMove : MonoBehaviour
     private bool _isGrounded,_secondJump;
     private Vector3 _direction,_velocity,_moveData,_nextPos,_capsuleTop,_capsuleBottom,_limitPos;
     private Transform _tr;
-    /// <summary>
-    /// プレイヤー
-    /// </summary>
+    
     // Start is called before the first frame update
     void Start()
     {

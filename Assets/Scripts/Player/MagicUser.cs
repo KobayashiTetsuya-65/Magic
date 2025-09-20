@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// –‚–@Œ‚‚Âˆ—
+/// </summary>
 public class MagicUser : MonoBehaviour
 {
     [SerializeField] private AttackMagic[] _attackMagics;

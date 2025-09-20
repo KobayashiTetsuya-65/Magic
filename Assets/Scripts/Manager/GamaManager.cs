@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GamaManager : MonoBehaviour
@@ -9,10 +10,13 @@ public class GamaManager : MonoBehaviour
     [SerializeField] private Material[] _materials;
     [SerializeField] private int _groupTotal = 1;
     [SerializeField] private int _pointParGroup = 3;
+    [Header("スコア加算スピード"), SerializeField] private float _scoreSpeed = 2;
     public static GamaManager Instance;
     private List<GameObject[]> _groups = new List<GameObject[]>();
     private List<PointErements[]> _reciveErements = new List<PointErements[]>();
+    private Coroutine _coroutine;
     private int _maxGroup = -1, _drawByPlayer;
+    public bool Finish = false;
     private void Awake()
     {
         Application.targetFrameRate = 120;
@@ -53,7 +57,16 @@ public class GamaManager : MonoBehaviour
             }
             _reciveErements.Add(pointErements);
         }
+        _coroutine = null;
     }
+    private void Update()
+    {
+
+    }
+    /// <summary>
+    /// 三角形描く
+    /// </summary>
+    /// <param name="group"></param>
     private void DrawTriangleArea(int group)
     {
         var positions = new Vector3[]
@@ -68,15 +81,38 @@ public class GamaManager : MonoBehaviour
         _lineRenderer[group].numCornerVertices = 10;
         _lineRenderer[group].material = _materials[_drawByPlayer];
     }
+    /// <summary>
+    /// スコアを変動
+    /// </summary>
+    IEnumerator ScoreFluctuation(PointErements character)
+    {
+        while (!Finish)
+        {
+            yield return new WaitForSeconds(_scoreSpeed);
+            ScoreManager.Instance.ScoreAddition(character);
+        }
+        _coroutine = null;
+    }
+    /// <summary>
+    /// ポイント攻撃時の状態管理
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="number"></param>
+    /// <param name="erement"></param>
     public void SetFlag(int index,int number,PointErements erement)
     {
         _reciveErements[index][number] = erement;
         if (AllTrue(_reciveErements[index]))
         {
             DrawTriangleArea(index);
-            Debug.Log("エリア確保！");
+            if(_coroutine == null) _coroutine = StartCoroutine(ScoreFluctuation(erement));
         }
     }
+    /// <summary>
+    /// すべてのポイントが攻撃されたかチェック
+    /// </summary>
+    /// <param name="erements"></param>
+    /// <returns></returns>
     private bool AllTrue(PointErements[] erements)
     {
         for (int i = 0; i < erements.Length; i++)
@@ -112,6 +148,9 @@ public class GamaManager : MonoBehaviour
         return true;
     }
 }
+/// <summary>
+/// ポイントの状態
+/// </summary>
 public enum PointErements
 {
     Player,Enemy,Null
